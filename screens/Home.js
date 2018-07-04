@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity ,ActivityIndicator, FlatList} from 'react-native';
 import * as firebase from 'firebase'
 import axios from 'axios'
 import { connect } from 'react-redux'
@@ -65,7 +65,17 @@ class Home extends React.Component {
           </View>
 
           <View style={styles.body}>
-            <VidioItem vidio={this.props.redux.youtube} />
+						{
+							this.props.redux.isLoading ?
+								<ActivityIndicator size='large' color='#330066' animating />
+							:
+                <FlatList 
+                  data={this.props.redux.youtube}
+                  renderItem={(video) =>  <VidioItem vidio={video.item} /> }
+								  keyExtractor={(item,index) => index.toString()}
+								  ItemSeparatorComponent={ () => <View style={{ height:0.5, backgroundColor:'#E5E5E5' }} /> } 	
+                />
+						}
           </View>
 
 					<View style={styles.tabBar}>
@@ -93,6 +103,7 @@ class Home extends React.Component {
     );
   }
 
+
   signOut = () => {
     firebase.auth().signOut()
         .then(() => {
@@ -109,6 +120,7 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+		backgroundColor : 'white'
   },
   navbar : {
     height : 55,
