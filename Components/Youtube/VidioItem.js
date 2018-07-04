@@ -10,7 +10,6 @@ class VidioItem extends React.Component {
       const vidio = this.props.vidio
 			console.log('batas')
 			console.log(this.props.vidio)
-			console.log(this.props.vidio[0].type)
       return(
             <View style={styles.container}>
                 <Image source={{ uri : 'https://i.ytimg.com/vi/aJOTlE1K90k/default.jpg' }} style={{height : 200}} />
