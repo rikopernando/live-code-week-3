@@ -3,12 +3,14 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import LoginScreen from './screens/Login'
 import RegisterScreen from './screens/Register'
 import HomeScreen from './screens/Home'
+import DetailYouTubeScreen from './screens/DetailYouTube'
 import { Provider } from 'react-redux'
 import store from './Store'
 
 const AuthStack = createStackNavigator({
     Login : { screen : LoginScreen },
-    Register : { screen : RegisterScreen }
+    Register : { screen : RegisterScreen },
+    DetailYouTube : { screen : DetailYouTubeScreen }
 },{
     initialRouteName : 'Login'
 })

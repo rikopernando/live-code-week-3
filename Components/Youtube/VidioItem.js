@@ -6,16 +6,18 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 class VidioItem extends React.Component {
     
     render() {
-      const vidio = this.props.vidio
+      console.log(this.props)
+      const  { vidio, navigate } = this.props
       return(
             <View style={styles.container}>
                 <Image source={{ uri : vidio.raw.snippet.thumbnails.medium.url }} style={{height : 200}} />
                 <View style={styles.descContainer}>
                   <Image source={{ uri : 'https://randomuser.me/api/portraits/women/44.jpg' }} style={{ width : 50, height : 50, borderRadius : 25 }} />
-                  <View style={styles.videoDetails}>
+                  <TouchableOpacity style={styles.videoDetails}
+                        onPress={ () => navigate('DetailYouTube', { youtubeId : vidio.raw.id.videoId }) }>
                     <Text numberOfLines={2} style={styles.videoTitle}> {vidio.title} </Text>
                     <Text style={styles.videoStats}> {vidio.raw.snippet.channelTitle + " - 8.6M views 3 months ago "} </Text>
-                  </View>
+                  </TouchableOpacity>
                   <TouchableOpacity>
                     <Icon name="more-vert" size={20} color='#999999'/>
                   </TouchableOpacity>
@@ -42,11 +44,11 @@ const styles = StyleSheet.create({
   },
   videoTitle : {
     fontSize : 16,
-    color : '#3c3c3c',
   },
   videoDetails : {
     paddingHorizontal : 15,
-    flex : 1
+    flex : 1,
+    color : '#E5E5E5',
   },
   videoStats : {
     fontSize : 15,

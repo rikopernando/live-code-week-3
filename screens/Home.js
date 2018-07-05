@@ -19,13 +19,17 @@ class Home extends React.Component {
                   <View>
                     <Image 
                           source={require('../image/youtube.jpeg')} 
-                          style={{ width:98, height:22, color:'#fff', marginLeft : 17 }} 
+                          style={{ width:98, height:22, color:'#fff', marginLeft : 14 }} 
                      /> 
                   </View>
             ),
             headerRight : (
                 <View style={styles.rightNav}>
                 
+                  <TouchableOpacity>
+                    <Icon style={{marginLeft:25}} name='videocam' size={25}/>
+                  </TouchableOpacity>
+
                   <TouchableOpacity>
                     <Icon style={{marginLeft:25}} name='search' size={25}/>
                   </TouchableOpacity>
@@ -63,17 +67,20 @@ class Home extends React.Component {
 
   render() {
   console.log(this.props)
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
 
           <View style={styles.body}>
 						{
 							this.props.redux.isLoading ?
-								<ActivityIndicator size='large' color='#330066' animating />
+								<View style={styles.loading}>
+										<ActivityIndicator size='large' color='#330066' animating />
+								</View>
 							:
                 <FlatList 
                   data={this.props.redux.youtube}
-                  renderItem={(video) =>  <VidioItem vidio={video.item} /> }
+                  renderItem={(video) =>  <VidioItem vidio={video.item} navigate={navigate} /> }
 								  keyExtractor={(item,index) => index.toString()}
 								  ItemSeparatorComponent={ () => <View style={{ height:0.5, backgroundColor:'#E5E5E5' }} /> } 	
                 />
@@ -156,6 +163,11 @@ const styles = StyleSheet.create({
     fontSize : 11,
     color : '#3c3c3c',
     paddingTop : 3
+  },
+  loading : {
+    flex : 1,
+    justifyContent : 'center',
+    alignItems : 'center'
   }
 })
 
