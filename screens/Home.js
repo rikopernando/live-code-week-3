@@ -12,12 +12,29 @@ class Home extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            title : 'Home',
+            headerStyle : {
+                backgroundColor : '#fff'
+            },
+            headerLeft : (
+                  <View>
+                    <Image 
+                          source={require('../image/youtube.jpeg')} 
+                          style={{ width:98, height:22, color:'#fff', marginLeft : 17 }} 
+                     /> 
+                  </View>
+            ),
             headerRight : (
-                <Button onPress={ navigation.getParam('signOut') }
-                    title='SignOut'
-                    color='black'
-                    />
+                <View style={styles.rightNav}>
+                
+                  <TouchableOpacity>
+                    <Icon style={{marginLeft:25}} name='search' size={25}/>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity>
+                    <Icon style={{marginLeft:25}} name='account-circle' size={25}/>
+                  </TouchableOpacity>
+
+                </View>
             )
         }
     }
@@ -48,21 +65,6 @@ class Home extends React.Component {
   console.log(this.props)
     return (
       <View style={styles.container}>
-
-					<View style={styles.navbar}>
-            <Image source={require('../image/youtube.jpeg')} style={{ width:98, height:22 }} /> 
-            <View style={styles.rightNav}>
-            
-              <TouchableOpacity>
-                <Icon style={{marginLeft:25}} name='search' size={25}/>
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <Icon style={{marginLeft:25}} name='account-circle' size={25}/>
-              </TouchableOpacity>
-
-            </View>
-          </View>
 
           <View style={styles.body}>
 						{
@@ -132,7 +134,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   rightNav : {
-    flexDirection : 'row'
+    flexDirection : 'row',
+    marginRight : 17
   }, 
   body : {
     flex : 1
